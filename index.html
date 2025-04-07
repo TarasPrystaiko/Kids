@@ -122,6 +122,33 @@
       transform: scale(1.05);
       box-shadow: 0 6px 14px rgba(255, 105, 180, 0.5);
     }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .modal-content {
+      background: var(--card-color);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 300px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      font-size: 20px;
+    }
+
+    .modal-content span {
+      font-size: 2rem;
+    }
   </style>
 </head>
 <body>
@@ -145,12 +172,22 @@
     <a class="btn" href="https://www.youtube.com/watch?v=5owhYLlOMSI" target="_blank" onclick="playClickSound()">🎬 Дивитись ще!</a>
   </div>
 
+  <div class="modal" id="surpriseModal" onclick="this.style.display='none'">
+    <div class="modal-content">
+      🎉 Ура! Ти знайшов секретний сюрприз! <br><br><span>✨🦄✨</span>
+    </div>
+  </div>
+
   <audio id="click-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_89c3d6a995.mp3?filename=button-click-124467.mp3"></audio>
   <script>
     function playClickSound() {
       const audio = document.getElementById('click-sound');
       audio.currentTime = 0;
       audio.play();
+    }
+
+    function showSurprise() {
+      document.getElementById('surpriseModal').style.display = 'flex';
     }
   </script>
 </body>
