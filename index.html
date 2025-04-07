@@ -30,6 +30,26 @@
       flex-direction: column;
       align-items: center;
       transition: background 0.4s ease, color 0.4s ease;
+      overflow-x: hidden;
+    }
+
+    .emoji-float {
+      position: fixed;
+      top: 100%;
+      font-size: 2rem;
+      animation: floatEmoji 5s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes floatEmoji {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh);
+        opacity: 0;
+      }
     }
 
     .logo {
@@ -147,6 +167,24 @@
       audio.currentTime = 0;
       audio.play();
     }
+
+    // Рандомні емодзі для анімації
+    const emojis = ['🎈','⭐','🎉','🧸','🌈','💫','🦄','🎵','🚀'];
+
+    function spawnEmoji() {
+      const emoji = document.createElement('div');
+      emoji.classList.add('emoji-float');
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = Math.random() * 100 + 'vw';
+      emoji.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+      document.body.appendChild(emoji);
+
+      setTimeout(() => {
+        emoji.remove();
+      }, 5000);
+    }
+
+    setInterval(spawnEmoji, 800);
   </script>
 </body>
 </html>
