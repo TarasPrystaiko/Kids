@@ -33,19 +33,6 @@
       overflow-x: hidden;
     }
 
-    .emoji-float {
-      position: fixed;
-      top: 100%;
-      font-size: 2rem;
-      animation: floatEmoji 5s linear infinite;
-      pointer-events: none;
-    }
-
-    @keyframes floatEmoji {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(-120vh); opacity: 0; }
-    }
-
     .logo {
       width: 120px;
       margin-bottom: 10px;
@@ -84,7 +71,7 @@
       50% { transform: translateY(-10px); }
     }
 
-    .video, .clicker {
+    .video {
       background: var(--card-color);
       border-radius: 20px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -103,8 +90,14 @@
     .video:nth-of-type(3) { animation-delay: 0.6s; }
 
     @keyframes fadeIn {
-      to { opacity: 1; transform: translateY(0); }
-      from { opacity: 0; transform: translateY(30px); }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
     }
 
     .thumbnail {
@@ -113,7 +106,7 @@
       margin-bottom: 10px;
     }
 
-    .btn, .click-btn {
+    .btn {
       display: inline-block;
       padding: 12px 24px;
       background: var(--accent-color);
@@ -125,31 +118,10 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .btn:hover, .click-btn:hover {
+    .btn:hover {
       transform: scale(1.05);
       box-shadow: 0 6px 14px rgba(255, 105, 180, 0.5);
     }
-
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .modal-content {
-      background: white;
-      border-radius: 20px;
-      padding: 30px;
-      max-width: 300px;
-      text-align: center;
-      font-size: 1.3rem;
-    }
-
-    .modal.show { display: flex; }
   </style>
 </head>
 <body>
@@ -158,6 +130,28 @@
   <button class="surprise-btn" onclick="showSurprise()">🎁 Сюрприз!</button>
   <h1>Обери відео <span aria-hidden="true">😄</span></h1>
 
-  <!-- решта HTML-контенту (відео, клікер, модалка тощо) залишаємо без змін -->
+  <div class="video">
+    <img class="thumbnail" src="https://img.youtube.com/vi/YujzhGdUIFE/hqdefault.jpg" alt="Video thumbnail">
+    <a class="btn" href="https://www.youtube.com/watch?v=YujzhGdUIFE" target="_blank" onclick="playClickSound()">🎥 Дивитись!</a>
+  </div>
+
+  <div class="video">
+    <img class="thumbnail" src="https://img.youtube.com/vi/ed0aLnuNw_U/hqdefault.jpg" alt="Video thumbnail">
+    <a class="btn" href="https://www.youtube.com/watch?v=ed0aLnuNw_U" target="_blank" onclick="playClickSound()">🎉 Почати пригоди!</a>
+  </div>
+
+  <div class="video">
+    <img class="thumbnail" src="https://img.youtube.com/vi/5owhYLlOMSI/hqdefault.jpg" alt="Video thumbnail">
+    <a class="btn" href="https://www.youtube.com/watch?v=5owhYLlOMSI" target="_blank" onclick="playClickSound()">🎬 Дивитись ще!</a>
+  </div>
+
+  <audio id="click-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_89c3d6a995.mp3?filename=button-click-124467.mp3"></audio>
+  <script>
+    function playClickSound() {
+      const audio = document.getElementById('click-sound');
+      audio.currentTime = 0;
+      audio.play();
+    }
+  </script>
 </body>
 </html>
